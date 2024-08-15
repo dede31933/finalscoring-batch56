@@ -1,0 +1,61 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7DW Hero Cards</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/assets/css/nav.css" />
+  </head>
+  <body>
+    <div class="container mt-4">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-warning">list of heroes</h1>
+        <div> 
+          {{#if isLogin}}
+            <div class="user-info text-center">
+              <p class="mb-1 text-white fw-bold">{{user.name}}</p>
+              <div class="button-group">
+                <a href="/logout" class="d-inline">
+                  <button class="btn btn-warning">Logout</button>
+                </a>
+                <a href="/addHero"><button class="btn btn-warning">Add Hero</button></a>
+                <a href="/addType"><button class="btn btn-warning">Add Type</button></a>
+              </div>
+            </div>
+          {{else}}
+            <a href="/login"> <button class="btn btn-success">Login</button></a>
+            <a href="/register"><button class="btn btn-success">Register</button></a>
+            <a href="/addType"><button class="btn btn-warning">Add Type</button></a>
+          {{/if}}
+           </div>
+      </div>
+      
+       <div class="row">
+        {{#each Hero}}
+          <div class="col-md-3 mb-4">
+            <div class="card text-center">
+            <img src="/src/uploads/{{this.image}}" class="card-img-top" alt="Hero Image" />
+                <div class="card-body">
+                <h5 class="card-title">{{this.name}}</h5>
+                <p class="card-text text-start text-success">{{this.typeName}}</p>
+                <a href="/Detail/{{id}}">
+                  <button class="btn btn-danger w-100">Detail</button>
+                </a>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    ></script>
+  </body>
+</html>

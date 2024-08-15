@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Update Hero</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/assets/css/nav.css" />
+</head>
+<body>
+  <div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <a href="/"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#ffffff" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+</svg>
+</a>
+      <div>
+        {{#if isLogin}}
+          <div class="user-info text-center">
+            <p class="mb-1 text-white fw-bold">{{user.name}}</p>
+            <div class="button-group">
+              <a href="/logout" class="d-inline">
+                <button class="btn btn-warning">Logout</button>
+              </a>
+              <a href="/addHero"><button class="btn btn-warning">Add Hero</button></a>
+              <a href="/addType"><button class="btn btn-warning">Add Type</button></a>
+            </div>
+          </div>
+        {{else}}
+          <a href="/login"><button class="btn btn-success">Login</button></a>
+          <a href="/register"><button class="btn btn-success">Register</button></a>
+          <a href="/addType"><button class="btn btn-warning">Add Type</button></a>
+        {{/if}}
+      </div>
+    </div>
+
+    <form class="row mx-auto" action="/update/{{Hero.id}}" method="POST" enctype="multipart/form-data">
+   <h1 class="text-warning text-center">Update Hero</h1>
+      <div class="col-md-8 offset-md-2">
+        <label for="nameHero" class="form-label fw-bold">Name Hero</label>
+        <input type="text" class="form-control" id="nameHero" name="nameHero" value="{{Hero.name}}" required />
+      </div>
+      <div class="col-md-8 offset-md-2">
+        <label for="typeHero" class="form-label fw-bold">Type Hero</label>
+        <select class="form-select" id="typeHero" name="TypeHero" required>
+          {{#each types}}
+            <option value="{{this.id}}" {{#if (equals this.id Hero.type_id)}}selected{{/if}}>{{this.name}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="col-md-8 offset-md-2 my-3">
+        <label for="image" class="form-label">Upload Image Hero</label>
+        <div class="input-group mb-3">
+          <input type="file" class="form-control" id="image" name="image" />
+          <span class="input-group-text"><i class="fas fa-paperclip"></i></span>
+        </div>
+        {{#if Hero.image}}
+          <div class="text-start">
+            <img src="/src/uploads/{{Hero.image}}" class="img-fluid justify-content-start" style="max-width: 200px; height: auto;" alt="Hero Image" />
+          </div>
+        {{/if}}
+      </div>
+      <div class="col-md-8 offset-md-2 d-flex justify-content-end mt-4">
+        <button type="submit" class="btn btn-danger w-25">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-5c4RZ9Z8x44N4T2q5wF0R2uF3lY8R6zQxS3U2ytL0C2MXg0A6b5WxW8Qs0ePpl5K" crossorigin="anonymous"></script>
+</body>
+</html>
